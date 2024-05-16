@@ -199,6 +199,7 @@
   }
   
   /* The typewriter cursor effect */
+ /* lol*/
   @keyframes blink-caret {
     from, to { border-color: transparent }
     50% { border-color: black }
