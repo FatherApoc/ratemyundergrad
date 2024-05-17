@@ -1,10 +1,10 @@
 @import url('https://fonts.googleapis.com/css?family=Poppins:400,500,600,700&display=swap');
 .navbar {
     overflow: hidden;
-    background-color: rgb(255, 255, 255);
-    position: fixed; /* Set the navbar to fixed position */
-    top: 0; /* Position the navbar at the top of the page */
-    width: 100%; /* Full width */
+    background-color: rgba(255, 255, 255, 0);
+    position: fixed; 
+    top: 0; 
+    width: 100%; 
     font-family: sans-serif;
   }
   .navbar a {
@@ -27,9 +27,9 @@
     width:10%;
   }
   .btn {
-    background-color: transparent; /* Blue background */
-    border: none; /* Remove borders */
-    cursor: pointer; /* Mouse pointer on hover */
+    background-color: transparent; 
+    border: none; 
+    cursor: pointer; 
     float: left;
     margin-top:-100px;
     transform:scale(0.2);
@@ -55,8 +55,8 @@
     --color-success: #4bb544;
     --border-radius: 4px;
 
-    margin: 0;
-    height: 100vh;
+    margin:0;
+    height: 150vh;
     display: flex;
     align-items: center;
     justify-content: center;
@@ -182,11 +182,11 @@
 .typewriter h1 {
     color: #ffffff;
     font-family: monospace;
-    overflow: hidden; /* Ensures the content is not revealed until the animation */
-    border-right: .15em solid orange; /* The typwriter cursor */
-    white-space: nowrap; /* Keeps the content on a single line */
-    margin: 0 auto; /* Gives that scrolling effect as the typing happens */
-    letter-spacing: .15em; /* Adjust as needed */
+    overflow: hidden; 
+    border-right: .15em solid orange; 
+    white-space: nowrap; 
+    margin: 0 auto; 
+    letter-spacing: .15em; 
     animation: 
       typing 3.5s steps(30, end),
       blink-caret .5s step-end infinite;
@@ -195,7 +195,7 @@
   /* The typing effect */
   @keyframes typing {
     from { width: 0 }
-    to { width: 100% }
+    to { width: 50% }
   }
   
   /* The typewriter cursor effect */
@@ -206,15 +206,16 @@
   }
 
   .line {
-    border-bottom: 3px solid rgb(212, 206, 206);
+    border-bottom: 3px solid rgb(212, 3, 3);
     margin-top: 20px;
     width: 100%;
 }
 
 .normalText {
     font-family:monospace;
-    margin-left: 40px;
-    margin-right: 40px;
+    margin-left: 100px;
+    margin-right: 100px;
+    display:block;
 }
 
 .hover-underline-animation {
@@ -239,4 +240,23 @@
 .hover-underline-animation:hover:after {
   transform: scaleX(1);
   transform-origin: bottom left;
+}
+
+.title {
+    color: #ffffff;
+    font-family: monospace;
+    overflow: hidden; 
+    white-space: nowrap; 
+    margin: 0 auto; 
+    letter-spacing: .15em; 
+    font-size:50px;
+}
+
+.roughText {
+    font-family:monospace;
+    margin-left: 300px;
+    margin-right: 300px;
+    display:block;
+    font-size:25px;
+    margin-top:-10px;
 }
