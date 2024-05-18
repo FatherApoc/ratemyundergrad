@@ -37,16 +37,134 @@ document.addEventListener("DOMContentLoaded", () => {
 
         setFormMessage(loginForm, "error", "Invalid username/password combination");
     });
+});
 
-    document.querySelectorAll(".form__input").forEach(inputElement => {
-        inputElement.addEventListener("blur", e => {
-            if (e.target.id === "signupUsername" && e.target.value.length > 0 && e.target.value.length < 10) {
-                setInputError(inputElement, "Username must be at least 10 characters in length");
-            }
-        });
+//Yevin's New Code
+//Button Inilization
+var loginButton = document.getElementById("login_button")
+var signupButton = document.getElementById("signup_button")
+var loginEmailInput = document.getElementById("login_email");
+var loginPasswordInput = document.getElementById("login_password");
+var signupEmailInput = document.getElementById("signup_email");
+var signupPasswordInput = document.getElementById("signupPassword");
+var signupRetypePassInput = document.getElementById("signupRetypePass");
+var signupUsername = document.getElementById("signupUsername");
 
-        inputElement.addEventListener("input", e => {
-            clearInputError(inputElement);
-        });
-    });
+
+//Firebase Auth Stuff
+import { initializeApp } from "https://www.gstatic.com/firebasejs/9.4.0/firebase-app.js";
+import { getAuth, connectAuthEmulator, signInWithEmailAndPassword, createUserWithEmailAndPassword } from 'https://www.gstatic.com/firebasejs/9.4.0/firebase-auth.js';
+import { getDatabase, ref, set } from 'https://www.gstatic.com/firebasejs/9.4.0/firebase-database.js'
+
+
+// Initialize Firebase
+const firebaseApp = initializeApp({
+   apiKey: "AIzaSyAUuQGipq90H8XSKt7OQ3Un5ZwSD-oB5PQ",
+   authDomain: "rate-my-undergrade.firebaseapp.com",
+   databaseURL: "https://rate-my-undergrade-default-rtdb.firebaseio.com/",
+   projectId: "rate-my-undergrade",
+   storageBucket: "rate-my-undergrade.appspot.com",
+   messagingSenderId: "1081275288722",
+   appId: "1:1081275288722:web:56029efa1b17e68c9a6a4b",
+   measurementId: "G-3WM7BH8B8D"
+ });
+
+
+const auth = getAuth(firebaseApp);
+const db = getDatabase(firebaseApp);
+
+
+//Sign In Function
+const loginEmailPassword = async () => {
+   const loginEmail = loginEmailInput.value;
+   const loginPassword = loginPasswordInput.value;
+
+
+   try {
+       const userCredential = await signInWithEmailAndPassword(auth, loginEmail, loginPassword);
+       console.log(userCredential.user);
+   }
+   catch(error) {
+       console.log(error);
+       setFormMessage(loginForm, error);
+   }
+}
+
+
+var usernameValue;
+
+
+//Sign Up Func
+const createAccount =  async () => {
+   const signupEmail = signupEmailInput.value;
+   const signupPassword = signupPasswordInput.value;
+   const signupRetypePassword = signupRetypePassInput.value;
+   const createAccountForm = document.querySelector("#createAccount");
+   const accountSetupForm = document.querySelector("#accountInfo");
+   usernameValue = signupUsername.value;
+
+
+   try {
+       const userCredential = await createUserWithEmailAndPassword(auth, signupEmail, signupPassword);
+       console.log(userCredential.user);
+       console.log("account made");
+       createAccountForm.classList.add("form--hidden");
+       accountSetupForm.classList.remove("form--hidden");
+   }
+   catch(error) {
+       console.log(error);
+       setInputError(inputElement, error);
+   }
+}
+
+
+//Save User Info
+function writeUserData(userId, username, type, uni, program, uniEmail) {
+   const db = getDatabase();
+
+
+   set(ref(db, 'users/' + userId), {
+     username: username,
+     accountType: type,
+     university: uni,
+     program: program,
+     uniEmail: uniEmail
+   });
+ }
+
+
+ const setupAccount =  async () => {
+   const accType = document.getElementById("type").value;
+   const uniName = document.getElementById("uni").value;
+   const programName = document.getElementById("program").value;
+   const uniEmailVerify = document.getElementById("uniEmail").value;
+   const userIdName = auth.currentUser.uid;
+   console.log(userIdName);
+   try {
+       writeUserData(userIdName, usernameValue, accType, uniName, programName, uniEmailVerify) 
+   }
+   catch(error) {
+       console.log(error);
+   }
+}
+
+
+loginButton.addEventListener("click", e => {
+   e.preventDefault(); // Prevent the default form submission behavior
+  
+   loginEmailPassword();
+});
+
+
+signupButton.addEventListener("click", e => {
+   e.preventDefault(); // Prevent the default form submission behavior
+  
+   createAccount();
+});
+
+
+setup_button.addEventListener("click", e => {
+   e.preventDefault(); // Prevent the default form submission behavior
+  
+   setupAccount();
 });
