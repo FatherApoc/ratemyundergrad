@@ -53,7 +53,7 @@ var signupUsername = document.getElementById("signupUsername");
 
 //Firebase Auth Stuff
 import { initializeApp } from "https://www.gstatic.com/firebasejs/9.4.0/firebase-app.js";
-import { getAuth, connectAuthEmulator, signInWithEmailAndPassword, createUserWithEmailAndPassword } from 'https://www.gstatic.com/firebasejs/9.4.0/firebase-auth.js';
+import { getAuth, signInWithPopup, connectAuthEmulator, GoogleAuthProvider, signInWithEmailAndPassword, createUserWithEmailAndPassword } from 'https://www.gstatic.com/firebasejs/9.4.0/firebase-auth.js';
 import { getDatabase, ref, set } from 'https://www.gstatic.com/firebasejs/9.4.0/firebase-database.js'
 
 
@@ -72,7 +72,7 @@ const firebaseApp = initializeApp({
 
 const auth = getAuth(firebaseApp);
 const db = getDatabase(firebaseApp);
-
+const provider = new GoogleAuthProvider();
 
 //Sign In Function
 const loginEmailPassword = async () => {
@@ -91,8 +91,6 @@ const loginEmailPassword = async () => {
 }
 
 
-var usernameValue;
-
 
 //Sign Up Func
 const createAccount =  async () => {
@@ -101,8 +99,6 @@ const createAccount =  async () => {
    const signupRetypePassword = signupRetypePassInput.value;
    const createAccountForm = document.querySelector("#createAccount");
    const accountSetupForm = document.querySelector("#accountInfo");
-   usernameValue = signupUsername.value;
-
 
    try {
        const userCredential = await createUserWithEmailAndPassword(auth, signupEmail, signupPassword);
@@ -138,6 +134,7 @@ function writeUserData(userId, username, type, uni, program, uniEmail) {
    const uniName = document.getElementById("uni").value;
    const programName = document.getElementById("program").value;
    const uniEmailVerify = document.getElementById("uniEmail").value;
+   const usernameValue = document.getElementById("usernameData").value;
    const userIdName = auth.currentUser.uid;
    console.log(userIdName);
    try {
@@ -148,6 +145,54 @@ function writeUserData(userId, username, type, uni, program, uniEmail) {
    }
 }
 
+
+//sign up With google
+function signInWithGoogle() {
+const createAccountForm = document.querySelector("#createAccount");
+const accountSetupForm = document.querySelector("#accountInfo");
+
+signInWithPopup(auth, provider)
+  .then((result) => {
+    const credential = GoogleAuthProvider.credentialFromResult(result);
+    const token = credential.accessToken;
+    const user = result.user;
+    console.log("google sign in completed");
+    createAccountForm.classList.add("form--hidden");
+    accountSetupForm.classList.remove("form--hidden");
+  }).catch((error) => {
+    // Handle Errors here.
+    const errorCode = error.code;
+    const errorMessage = error.message;
+    // The email of the user's account used.
+    const email = error.customData.email;
+    // The AuthCredential type that was used.
+    const credential = GoogleAuthProvider.credentialFromError(error);
+    // ...
+  });
+}
+
+//Login in with google
+function loginInWithGoogle() {
+    const createAccountForm = document.querySelector("#createAccount");
+    const accountSetupForm = document.querySelector("#accountInfo");
+    
+    signInWithPopup(auth, provider)
+      .then((result) => {
+        const credential = GoogleAuthProvider.credentialFromResult(result);
+        const token = credential.accessToken;
+        const user = result.user;
+        console.log("google sign in completed");
+      }).catch((error) => {
+        // Handle Errors here.
+        const errorCode = error.code;
+        const errorMessage = error.message;
+        // The email of the user's account used.
+        const email = error.customData.email;
+        // The AuthCredential type that was used.
+        const credential = GoogleAuthProvider.credentialFromError(error);
+        // ...
+      });
+    }
 
 loginButton.addEventListener("click", e => {
    e.preventDefault(); // Prevent the default form submission behavior
@@ -168,3 +213,15 @@ setup_button.addEventListener("click", e => {
   
    setupAccount();
 });
+
+googleSignUp_button.addEventListener("click", e => {
+    e.preventDefault(); // Prevent the default form submission behavior
+   
+    signInWithGoogle();
+ });
+
+ googlelogin_button.addEventListener("click", e => {
+    e.preventDefault(); // Prevent the default form submission behavior
+   
+    loginInWithGoogle();
+ });
