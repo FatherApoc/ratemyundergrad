@@ -139,6 +139,7 @@ function writeUserData(userId, username, type, uni, program, uniEmail) {
    console.log(userIdName);
    try {
        writeUserData(userIdName, usernameValue, accType, uniName, programName, uniEmailVerify) 
+       window.location.replace("http://127.0.0.1:5500/forums.html");
    }
    catch(error) {
        console.log(error);
