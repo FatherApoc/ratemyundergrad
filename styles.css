@@ -186,7 +186,7 @@
   /* The typing effect */
   @keyframes typing {
     from { width: 0 }
-    to { width: 50% }
+    to { width: 75% }
   }
   
   /* The typewriter cursor effect */
@@ -260,6 +260,7 @@
     border-radius: 12px;
     background: #ffffff;
     font-family: monospace;
+    box-shadow:10px 10px;
 }
 
 .secondaryTitle {
@@ -286,4 +287,84 @@
   cursor:pointer;
   margin-left:-300px;
   background-color:rgb(212, 3, 3)
+}
+
+.container1 {
+    width: 400px;
+    max-width: 400px;
+    margin: 1rem;
+    padding: 2rem;
+    box-shadow: 0 0 40px rgba(0, 0, 0, 0.2);
+    border-radius: var(--border-radius);
+    background: #ffffff;
+    margin-left:-400px;
+}
+
+.containermain{
+    width: 400px;
+    max-width: 400px;
+    margin: 1rem;
+    padding: 2rem;
+    box-shadow: 0 0 40px rgba(0, 0, 0, 0.2);
+    border-radius: var(--border-radius);
+    background: #ffffff;
+}
+
+.subsidiaryText {
+    font-family:monospace;
+    display:block;
+    font-size:10;
+    margin-top:-10px;
+}
+
+.dropbtn {
+    background-color: #566660;
+    color: white;
+    padding: 16px;
+    font-size: 16px;
+    border: none;
+    margin-left:32px;
+  }
+  
+  .dropdown {
+    position: relative;
+    display: inline-block;
+  }
+    .dropdown-content {
+    display: none;
+    position: absolute;
+    background-color: #f1f1f1;
+    min-width: 160px;
+    box-shadow: 0px 8px 16px 0px rgba(0,0,0,0.2);
+    z-index: 1;
+  }
+  .dropdown-content a {
+    color: black;
+    padding: 12px 16px;
+    text-decoration: none;
+    display: block;
+  }
+    .dropdown-content a:hover {background-color: #ddd;}
+  .dropdown:hover .dropdown-content {display: block;}
+  .dropdown:hover .dropbtn {background-color: #3e8e41;}
+
+  .container2 {
+    width: 800px;
+    margin: 1rem;
+    padding: 2rem;
+    box-shadow: 0 0 40px rgba(0, 0, 0, 0.2);
+    border-radius: 12px;
+    background: #ffffff;
+    font-family: monospace;
+}
+
+.containersecondText {
+    width: 400px;
+    max-width: 400px;
+    margin: 1rem;
+    padding: 2rem;
+    box-shadow: 0 0 40px rgba(0, 0, 0, 0.2);
+    border-radius: var(--border-radius);
+    background: #ffffff;
+
 }
