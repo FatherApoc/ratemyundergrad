@@ -1,13 +1,12 @@
 <!DOCTYPE html>
 <html lang="en">
-<head>
-    <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Document</title>
-    
-</head>
-<link rel="stylesheet" href="styles.css" />
-    <link rel="stylesheet" href="/Images" />
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Forum Page</title>
+    <title>Rate My Undergrad</title>
+    <link rel="stylesheet" href="styles.css" />
+    <link rel="stylesheet" href="/Im ages" />
     <div class="navbar">
       <button class = "btn"><img src="Images/projectLogo.png"><a href="home.html"></class></i></button>
       <a href="home.html">HOME</a>
@@ -20,7 +19,184 @@
       <br />
       <div class="line"></div>
     </div>
-<body>
-  <p><div class="title"></class>UNDERGRADUATE FORUM</p>
-</body>
+    <div class="typewriter"> 
+    <style>
+      body {
+        font-family: Arial, sans-serif;
+        margin: 0;
+        padding: 0;
+        background-color: #f4f4f4;
+      }
+      .header {
+        background-color: #4caf50;
+        color: white;
+        padding: 10px 20px;
+        text-align: center;
+      }
+      .container {
+        padding: 20px;
+      }
+      .search-bar {
+        display: flex;
+        justify-content: space-between;
+        margin-bottom: 20px;
+      }
+      .search-bar input {
+        width: 80%;
+        padding: 10px;
+        border: 1px solid #ccc;
+        border-radius: 4px;
+      }
+      .search-bar button {
+        padding: 10px 20px;
+        border: none;
+        background-color: #4caf50;
+        color: white;
+        border-radius: 4px;
+        cursor: pointer;
+      }
+      .search-bar button:hover {
+        background-color: #45a049;
+      }
+      .post {
+        background-color: white;
+        padding: 15px;
+        margin-bottom: 15px;
+        border-radius: 4px;
+        box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
+      }
+      .post-title {
+        font-size: 1.2em;
+        margin-bottom: 10px;
+      }
+      .post-content {
+        font-size: 1em;
+      }
+      .modal {
+        display: none;
+        position: fixed;
+        z-index: 1;
+        left: 0;
+        top: 0;
+        width: 100%;
+        height: 100%;
+        overflow: auto;
+        background-color: rgba(0, 0, 0, 0.4);
+        justify-content: center;
+        align-items: center;
+      }
+      .modal-content {
+        background-color: white;
+        margin: 15% auto;
+        padding: 20px;
+        border: 1px solid #888;
+        width: 80%;
+        max-width: 500px;
+        border-radius: 4px;
+      }
+      .close {
+        color: #aaa;
+        float: right;
+        font-size: 28px;
+        font-weight: bold;
+      }
+      .close:hover,
+      .close:focus {
+        color: black;
+        text-decoration: none;
+        cursor: pointer;
+      }
+    </style>
+  </head>
+  <body>
+    <div class="container">
+      <div class="search-bar">
+        <input type="text" placeholder="Search..." />
+        <button id="createPostBtn">Create Post</button>
+      </div>
+      <div class="post">
+        <div class="post-title">Post Title 1</div>
+        <div class="post-content">
+          Lorem ipsum dolor sit amet, consectetur adipiscing elit. Pellentesque
+          imperdiet suscipit nisi, at sodales metus.
+        </div>
+      </div>
+      <div class="post">
+        <div class="post-title">Post Title 2</div>
+        <div class="post-content">
+          Vestibulum ante ipsum primis in faucibus orci luctus et ultrices
+          posuere cubilia Curae; Duis consequat lorem at nibh tempor, nec
+          laoreet libero scelerisque.
+        </div>
+      </div>
+      <!-- Add more posts here -->
+    </div>
+
+    <!-- The Modal -->
+    <div id="postModal" class="modal">
+      <div class="modal-content">
+        <span class="close">&times;</span>
+        <h2>Create Post</h2>
+        <form>
+          <label for="postTitle">Title</label>
+          <input
+            type="text"
+            id="postTitle"
+            name="postTitle"
+            required
+            style="width: 100%; padding: 10px; margin: 10px 0"
+          />
+          <label for="postContent">Content</label>
+          <textarea
+            id="postContent"
+            name="postContent"
+            rows="5"
+            required
+            style="width: 100%; padding: 10px; margin: 10px 0"
+          ></textarea>
+          <button
+            type="submit"
+            style="
+              padding: 10px 20px;
+              background-color: #4caf50;
+              color: white;
+              border: none;
+              border-radius: 4px;
+              cursor: pointer;
+            "
+          >
+            Submit
+          </button>
+        </form>
+      </div>
+    </div>
+
+    <script>
+      // Get the modal
+      var modal = document.getElementById("postModal");
+
+      // Get the button that opens the modal
+      var btn = document.getElementById("createPostBtn");
+
+      // Get the <span> element that closes the modal
+      var span = document.getElementsByClassName("close")[0];
+
+      // When the user clicks the button, open the modal
+      btn.onclick = function () {
+        modal.style.display = "flex";
+      };
+
+      // When the user clicks on <span> (x), close the modal
+      span.onclick = function () {
+        modal.style.display = "none";
+      };
+
+      // When the user clicks anywhere outside of the modal, close it
+      window.onclick = function (event) {
+        if (event.target == modal) {
+          modal.style.display = "none";
+        }
+      };
+    </script>
+  </body>
 </html>
