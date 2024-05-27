@@ -1,10 +1,9 @@
 <!DOCTYPE html>
 <html lang="en">
-  <head>
-    <meta charset="UTF-8" />
-    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-    <title>Forum Page</title>
-    <title>Rate My Undergrad</title>
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Forum</title>
     <link rel="stylesheet" href="styles.css" />
     <link rel="stylesheet" href="/Im ages" />
     <div class="navbar">
@@ -19,173 +18,147 @@
       <br />
       <div class="line"></div>
     </div>
-    <div class="typewriter"> 
     <style>
-      body {
-        font-family: Arial, sans-serif;
-        margin: 0;
-        padding: 0;
-        background-color: #f4f4f4;
-      }
-      .header {
-        background-color: #4caf50;
-        color: white;
-        padding: 10px 20px;
-        text-align: center;
-      }
-      .container {
-        padding: 20px;
-      }
-      .search-bar {
-        display: flex;
-        justify-content: space-between;
-        margin-bottom: 20px;
-      }
-      .search-bar input {
-        width: 80%;
-        padding: 10px;
-        border: 1px solid #ccc;
-        border-radius: 4px;
-      }
-      .search-bar button {
-        padding: 10px 20px;
-        border: none;
-        background-color: #4caf50;
-        color: white;
-        border-radius: 4px;
-        cursor: pointer;
-      }
-      .search-bar button:hover {
-        background-color: #45a049;
-      }
-      .post {
-        background-color: white;
-        padding: 15px;
-        margin-bottom: 15px;
-        border-radius: 4px;
-        box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
-      }
-      .post-title {
-        font-size: 1.2em;
-        margin-bottom: 10px;
-      }
-      .post-content {
-        font-size: 1em;
-      }
-      .modal {
-        display: none;
-        position: fixed;
-        z-index: 1;
-        left: 0;
-        top: 0;
-        width: 100%;
-        height: 100%;
-        overflow: auto;
-        background-color: rgba(0, 0, 0, 0.4);
-        justify-content: center;
-        align-items: center;
-      }
-      .modal-content {
-        background-color: white;
-        margin: 15% auto;
-        padding: 20px;
-        border: 1px solid #888;
-        width: 80%;
-        max-width: 500px;
-        border-radius: 4px;
-      }
-      .close {
-        color: #aaa;
-        float: right;
-        font-size: 28px;
-        font-weight: bold;
-      }
-      .close:hover,
-      .close:focus {
-        color: black;
-        text-decoration: none;
-        cursor: pointer;
-      }
-    </style>
-  </head>
-  <body>
-    <div class="container">
-      <div class="search-bar">
-        <input type="text" placeholder="Search..." />
-        <button id="createPostBtn">Create Post</button>
-      </div>
-      <div class="post">
-        <div class="post-title">Post Title 1</div>
-        <div class="post-content">
-          yevin was here
-        </div>
-      </div>
-      <div class="post">
-        <div class="post-title">Post Title 2</div>
-        <div class="post-content">
-          nameer was here
-        </div>
-      </div>
-    </div>
-
-    <div id="postModal" class="modal">
-      <div class="modal-content">
-        <span class="close">&times;</span>
-        <h2>Create Post</h2>
-        <form>
-          <label for="postTitle">Title</label>
-          <input
-            type="text"
-            id="postTitle"
-            name="postTitle"
-            required
-            style="width: 100%; padding: 10px; margin: 10px 0"
-          />
-          <label for="postContent">Content</label>
-          <textarea
-            id="postContent"
-            name="postContent"
-            rows="5"
-            required
-            style="width: 100%; padding: 10px; margin: 10px 0"
-          ></textarea>
-          <button
-            type="submit"
-            style="
-              padding: 10px 20px;
-              background-color: #4caf50;
-              color: white;
-              border: none;
-              border-radius: 4px;
-              cursor: pointer;
-            "
-          >
-            Submit
-          </button>
-        </form>
-      </div>
-    </div>
-
-    <script>
-      var modal = document.getElementById("postModal");
-
-      var btn = document.getElementById("createPostBtn");
-
-      var span = document.getElementsByClassName("close")[0];
-
-      btn.onclick = function () {
-        modal.style.display = "flex";
-      };
-
-      span.onclick = function () {
-        modal.style.display = "none";
-      };
-
-      window.onclick = function (event) {
-        if (event.target == modal) {
-          modal.style.display = "none";
+        body {
+            font-family: Arial, sans-serif;
+            padding: 20px;
         }
-      };
-    </script>
-  </body>
+        .search-bar {
+            display: flex;
+            align-items: center;
+            margin-bottom: 20px;
+        }
+        .search-bar input {
+            width: 300px;
+            padding: 10px;
+            border-radius: 20px;
+            border: 1px solid #ccc;
+            outline: none;
+        }
+        .search-bar button {
+            padding: 10px 15px;
+            margin-left: 10px;
+            border: none;
+            border-radius: 20px;
+            cursor: pointer;
+        }
+        .search-bar .filter-button {
+            background-color: #f0ad4e;
+            color: white;
+        }
+        .search-bar .search-button {
+            background-color: #5bc0de;
+            color: white;
+        }
+        .search-bar .create-button {
+            background-color: #5cb85c;
+            color: white;
+        }
+        .popup {
+            display: none;
+            position: fixed;
+            top: 50%;
+            left: 50%;
+            transform: translate(-50%, -50%);
+            padding: 20px;
+            background-color: white;
+            box-shadow: 0px 0px 10px rgba(0, 0, 0, 0.1);
+            z-index: 1000;
+            border-radius: 10px;
+        }
+        .overlay {
+            display: none;
+            position: fixed;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            background: rgba(0, 0, 0, 0.5);
+            z-index: 999;
+        }
+        .forum-posts {
+            margin-top: 20px;
+        }
+        .forum-post {
+            border: 1px solid #ccc;
+            padding: 10px;
+            margin-bottom: 10px;
+            border-radius: 10px;
+        }
+    </style>
+</head>
+<body>
+
+<div class="search-bar">
+    <input type="text" id="searchInput" placeholder="Search...">
+    <button class="filter-button" id="filterButton">Filter</button>
+    <button class="search-button" id="searchButton">Search</button>
+    <button class="create-button" id="createButton">Create</button>
+</div>
+
+<div id="filterPopup" class="popup">
+    <h2>Filter Options</h2>
+    <button onclick="closeFilterPopup()">Close</button>
+</div>
+
+<div id="createPostPopup" class="popup">
+    <h2>Create Post</h2>
+    <form id="createPostForm">
+        <input type="text" id="postTitle" placeholder="Title" required><br><br>
+        <textarea id="postContent" placeholder="Content" required></textarea><br><br>
+        <button type="submit">Post</button>
+    </form>
+    <button onclick="closeCreatePostPopup()">Close</button>
+</div>
+
+<div id="overlay" class="overlay"></div>
+
+<div class="forum-posts" id="forumPosts">
+  <!--add nam stuff-->
+</div>
+
+<script>
+    document.getElementById('filterButton').addEventListener('click', function() {
+        document.getElementById('filterPopup').style.display = 'block';
+        document.getElementById('overlay').style.display = 'block';
+    });
+
+    document.getElementById('createButton').addEventListener('click', function() {
+        document.getElementById('createPostPopup').style.display = 'block';
+        document.getElementById('overlay').style.display = 'block';
+    });
+
+    document.getElementById('createPostForm').addEventListener('submit', function(event) {
+        event.preventDefault();
+        const title = document.getElementById('postTitle').value;
+        const content = document.getElementById('postContent').value;
+        addPost(title, content);
+        closeCreatePostPopup();
+    });
+
+    function closeFilterPopup() {
+        document.getElementById('filterPopup').style.display = 'none';
+        document.getElementById('overlay').style.display = 'none';
+    }
+
+    function closeCreatePostPopup() {
+        document.getElementById('createPostPopup').style.display = 'none';
+        document.getElementById('overlay').style.display = 'none';
+    }
+
+    function addPost(title, content) {
+        const forumPosts = document.getElementById('forumPosts');
+        const newPost = document.createElement('div');
+        newPost.className = 'forum-post';
+        newPost.innerHTML = `<h3>${title}</h3><p>${content}</p>`;
+        forumPosts.appendChild(newPost);
+    }
+
+    document.getElementById('overlay').addEventListener('click', function() {
+        closeFilterPopup();
+        closeCreatePostPopup();
+    });
+</script>
+
+</body>
 </html>
