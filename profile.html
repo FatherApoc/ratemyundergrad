@@ -157,6 +157,10 @@
           console.log(pair[0] + ": " + pair[1]);
         }
       }
+      firebase.database().ref('Users/User Information/'+uid.value).once('value', 
+      function(snapshot) {
+      document.getElementById('name').value = snapshot.val().Name;
+      });
     </script>
   </body>
 </html>
