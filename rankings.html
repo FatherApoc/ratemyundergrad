@@ -3,7 +3,7 @@
   <head>
     <meta charset="UTF-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-    <title>University Pros and Cons</title>
+    <title>Ontario Universities Search</title>
     <link rel="stylesheet" href="styles.css" />
   </head>
   <body>
@@ -20,16 +20,13 @@
       <div class="line"></div>
     </div>
     <div class="container">
-      <h1>University Pros and Cons</h1>
-      <form id="university-form">
-        <input
-          type="text"
-          id="university-name"
-          placeholder="Enter university name"
-          required
-        />
-        <button type="submit">Search</button>
-      </form>
+      <h1>Ontario Universities Search</h1>
+      <input
+        type="text"
+        id="searchBox"
+        placeholder="Enter university name..."
+      />
+      <button id="searchButton">Search</button>
       <div id="results"></div>
     </div>
     <script src="script.js"></script>
@@ -37,76 +34,182 @@
   <style>
     body {
       font-family: Arial, sans-serif;
-      background-color: #f0f0f0;
+      background-color: #f4f4f9;
       margin: 0;
       padding: 0;
+      display: flex;
+      justify-content: center;
+      align-items: center;
+      height: 100vh;
     }
 
     .container {
-      max-width: 800px;
-      margin: 50px auto;
-      padding: 20px;
-      background-color: #fff;
-      box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
-      border-radius: 8px;
+      text-align: center;
     }
 
     h1 {
-      text-align: center;
       color: #333;
     }
 
-    form {
-      display: flex;
-      justify-content: center;
-      margin-bottom: 20px;
-    }
-
-    input {
+    #searchBox {
       padding: 10px;
-      font-size: 16px;
-      margin-right: 10px;
-      border: 1px solid #ddd;
-      border-radius: 4px;
+      width: 300px;
+      margin-bottom: 20px;
+      border: 2px solid #ddd;
+      border-radius: 5px;
     }
 
-    button {
+    #searchButton {
       padding: 10px 20px;
-      font-size: 16px;
-      background-color: #007bff;
-      color: #fff;
       border: none;
-      border-radius: 4px;
+      background-color: #007bff;
+      color: white;
+      border-radius: 5px;
       cursor: pointer;
     }
 
-    button:hover {
+    #searchButton:hover {
       background-color: #0056b3;
     }
 
     #results {
       margin-top: 20px;
+      display: flex;
+      flex-direction: column;
+      align-items: center;
     }
 
-    table {
-      width: 100%;
-      border-collapse: collapse;
-    }
-
-    table,
-    th,
-    td {
-      border: 1px solid #ddd;
-    }
-
-    th,
-    td {
-      padding: 10px;
+    .result {
+      background-color: white;
+      border: 2px solid #ddd;
+      border-radius: 10px;
+      padding: 20px;
+      margin-bottom: 20px;
+      box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+      max-width: 600px;
       text-align: left;
+      transition: transform 0.2s ease;
     }
 
-    th {
-      background-color: #f4f4f4;
+    .result:hover {
+      transform: scale(1.05);
+    }
+
+    .result img {
+      width: 100px;
+      height: auto;
+      display: block;
+      margin-bottom: 10px;
+    }
+
+    .result h2 {
+      color: #007bff;
+      margin-top: 0;
+    }
+
+    .pros,
+    .cons {
+      list-style-type: none;
+      padding: 0;
+    }
+
+    .pros li,
+    .cons li {
+      background-color: #f4f4f9;
+      margin: 5px 0;
+      padding: 10px;
+      border-radius: 5px;
+    }
+
+    .pros li {
+      border-left: 5px solid green;
+    }
+
+    .cons li {
+      border-left: 5px solid red;
     }
   </style>
+  <script>
+    document
+      .getElementById("searchButton")
+      .addEventListener("click", function () {
+        const searchQuery = document
+          .getElementById("searchBox")
+          .value.toLowerCase();
+        const resultsDiv = document.getElementById("results");
+        resultsDiv.innerHTML = "";
+
+        const universities = {
+          "university of toronto": {
+            name: "University of Toronto",
+            logo: "https://upload.wikimedia.org/wikipedia/en/thumb/8/88/University_of_Toronto_coat_of_arms.svg/1200px-University_of_Toronto_coat_of_arms.svg.png",
+            pros: [
+              "World-renowned faculty",
+              "Diverse student body",
+              "Extensive research opportunities",
+            ],
+            cons: [
+              "High tuition fees",
+              "Large class sizes",
+              "Competitive environment",
+            ],
+          },
+          "mcmaster university": {
+            name: "McMaster University",
+            logo: "https://upload.wikimedia.org/wikipedia/en/thumb/f/fb/McMaster_University_seal.svg/1200px-McMaster_University_seal.svg.png",
+            pros: [
+              "Strong engineering and medical programs",
+              "Beautiful campus",
+              "Supportive community",
+            ],
+            cons: [
+              "Limited parking",
+              "Old dorm facilities",
+              "Intensive workload",
+            ],
+          },
+         
+        };
+
+        if (universities[searchQuery]) {
+          const university = universities[searchQuery];
+          const resultDiv = document.createElement("div");
+          resultDiv.className = "result";
+
+          const logoImg = document.createElement("img");
+          logoImg.src = university.logo;
+
+          const nameH2 = document.createElement("h2");
+          nameH2.innerText = university.name;
+
+          const prosUl = document.createElement("ul");
+          prosUl.className = "pros";
+          university.pros.forEach((pro) => {
+            const proLi = document.createElement("li");
+            proLi.innerText = pro;
+            prosUl.appendChild(proLi);
+          });
+
+          const consUl = document.createElement("ul");
+          consUl.className = "cons";
+          university.cons.forEach((con) => {
+            const conLi = document.createElement("li");
+            conLi.innerText = con;
+            consUl.appendChild(conLi);
+          });
+
+          resultDiv.appendChild(logoImg);
+          resultDiv.appendChild(nameH2);
+          resultDiv.appendChild(prosUl);
+          resultDiv.appendChild(consUl);
+
+          resultsDiv.appendChild(resultDiv);
+        } else {
+          const noResultsDiv = document.createElement("div");
+          noResultsDiv.className = "result";
+          noResultsDiv.innerText = "No results found";
+          resultsDiv.appendChild(noResultsDiv);
+        }
+      });
+  </script>
 </html>
