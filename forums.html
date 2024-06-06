@@ -1,178 +1,208 @@
 <!DOCTYPE html>
 <html lang="en">
-<head>
-    <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Forum</title>
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Search Bar with Filter and Create Post</title>
     <link rel="stylesheet" href="styles.css" />
-    <link rel="stylesheet" href="/Images" />
     <div class="navbar">
-      <button class = "btn"><img src="Images/projectLogo.png"><a href="home.html"></class></i></button>
-      <a href="home.html">HOME</a>
-      <a href="forums.html">FORUMS</a>
-      <a href="rankings.html">RANKINGS</a>
-      <a href="info.html">INFO</a>
-      <a href="profile.html">👤PROFILE</a>
-      <a href="signup.html" class="split">SIGN-IN</a>
-      <br />
-      <br />
-      <div class="line"></div>
+        <button class = "btn"><img src="Images/projectLogo.png"><a href="home.html"></class></i></button>
+        <a href="home.html">HOME</a>
+        <a href="forums.html">FORUMS</a>
+        <a href="rankings.html">RANKINGS</a>
+        <a href="info.html">INFO</a>
+        <a href="profile.html">👤PROFILE</a>
+        <a href="signup.html" class="split">SIGN-IN</a>
+        <br />
+        <br />
+        <div class="line"></div>
+      </div>
+  </head>
+  <body>
+    <div class="container">
+      <div class="search-bar">
+        <input type="text" id="search-input" placeholder="Search..." />
+        <button id="filter-button">Filter</button>
+        <button id="search-button">Search</button>
+      </div>
+      <button id="create-post-button">Create Post</button>
     </div>
+
+    <div id="posts-container"></div>
+
+    <div id="filter-popup" class="popup">
+      <div class="popup-content">
+        <h2>Select University</h2>
+        <ul>
+          <li>
+            <button class="university-button">University of Toronto</button>
+          </li>
+          <li>
+            <button class="university-button">University of Ottawa</button>
+          </li>
+          <li><button class="university-button">Western University</button></li>
+          <li><button class="university-button">Queen's University</button></li>
+        </ul>
+        <button id="close-filter-popup">Close</button>
+      </div>
+    </div>
+
+    <div id="create-post-popup" class="popup">
+      <div class="popup-content">
+        <h2>Create Post</h2>
+        <label for="post-name">Post Name:</label>
+        <input type="text" id="post-name" />
+        <label for="post-description">Description:</label>
+        <textarea id="post-description"></textarea>
+        <label for="post-category">Category:</label>
+        <input type="text" id="post-category" />
+        <button id="submit-post">Submit</button>
+        <button id="close-create-post-popup">Close</button>
+      </div>
+    </div>
+
     <style>
-        body {
-            font-family: Arial, sans-serif;
-            padding: 20px;
-        }
-        .search-bar {
-            display: flex;
-            align-items: center;
-            margin-bottom: 20px;
-        }
-        .search-bar input {
-            width: 300px;
-            padding: 10px;
-            border-radius: 20px;
-            border: 1px solid #ccc;
-            outline: none;
-        }
-        .search-bar button {
-            padding: 10px 15px;
-            margin-left: 10px;
-            border: none;
-            border-radius: 20px;
-            cursor: pointer;
-        }
-        .search-bar .filter-button {
-            background-color: #f0ad4e;
-            color: white;
-        }
-        .search-bar .search-button {
-            background-color: #5bc0de;
-            color: white;
-        }
-        .search-bar .create-button {
-            background-color: #5cb85c;
-            color: white;
-        }
-        .popup {
-            display: none;
-            position: fixed;
-            top: 50%;
-            left: 50%;
-            transform: translate(-50%, -50%);
-            padding: 20px;
-            background-color: white;
-            box-shadow: 0px 0px 10px rgba(0, 0, 0, 0.1);
-            z-index: 1000;
-            border-radius: 10px;
-        }
-        .overlay {
-            display: none;
-            position: fixed;
-            top: 0;
-            left: 0;
-            width: 100%;
-            height: 100%;
-            background: rgba(0, 0, 0, 0.5);
-            z-index: 999;
-        }
-        .forum-posts {
-            margin-top: 20px;
-        }
-        .forum-post {
-            border: 1px solid #ccc;
-            padding: 10px;
-            margin-bottom: 10px;
-            border-radius: 10px;
-        }
+      body {
+        font-family: Arial, sans-serif;
+        display: flex;
+        justify-content: center;
+        align-items: center;
+        height: 100vh;
+        background-color: #f4f4f4;
+        margin: 0;
+      }
 
-        .navbar {
-          margin-left:-40px;
-        }
+      .container {
+        display: flex;
+        align-items: center;
+        margin-right:-100px;
+      }
+
+      .search-bar {
+        display: flex;
+        border: 1px solid #ccc;
+        border-radius: 25px;
+        overflow: hidden;
+      }
+
+      .search-bar input {
+        border: none;
+        padding: 10px;
+        flex: 1;
+      }
+
+      .search-bar button {
+        border: none;
+        background-color: #007bff;
+        color: white;
+        padding: 10px 20px;
+        cursor: pointer;
+      }
+
+      #filter-button {
+        background-color: #6c757d;
+      }
+
+      #filter-popup,
+      #create-post-popup {
+        display: none;
+        position: fixed;
+        top: 50%;
+        left: 50%;
+        transform: translate(-50%, -50%);
+        background-color: white;
+        border: 1px solid #ccc;
+        border-radius: 5px;
+        padding: 20px;
+        box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
+      }
+
+      .popup-content h2 {
+        margin-top: 0;
+      }
+
+      #posts-container {
+        margin-top: 20px;
+        width: 100%;
+      }
+
+      .post {
+        background-color: white;
+        padding: 10px;
+        border: 1px solid #ccc;
+        border-radius: 5px;
+        margin-bottom: 10px;
+      }
+
+      button {
+        cursor: pointer;
+      }
+
+      button:focus {
+        outline: none;
+      }
     </style>
-</head>
-<body>
-  <div class="typewriter">
-    <center>
-    <h1>UNDERGRADUATE FORUM</h1>
-    <br>
-    <br>
-    <br>
-  </center>
-<div class="search-bar">
-    <input type="text" id="searchInput" placeholder="Search...">
-    <button class="filter-button" id="filterButton">Filter</button>
-    <button class="search-button" id="searchButton">Search</button>
-    <button class="create-button" id="createButton">Create</button>
-</div>
+    <script>
+      document.addEventListener("DOMContentLoaded", () => {
+        const filterButton = document.getElementById("filter-button");
+        const filterPopup = document.getElementById("filter-popup");
+        const closeFilterPopup = document.getElementById("close-filter-popup");
 
-<div id="filterPopup" class="popup">
-    <h2>Filter Options</h2>
-    <button onclick="closeFilterPopup()">Close</button>
-</div>
+        const createPostButton = document.getElementById("create-post-button");
+        const createPostPopup = document.getElementById("create-post-popup");
+        const closeCreatePostPopup = document.getElementById(
+          "close-create-post-popup"
+        );
+        const submitPostButton = document.getElementById("submit-post");
 
-<div id="createPostPopup" class="popup">
-    <h2>Create Post</h2>
-    <form id="createPostForm">
-        <input type="text" id="postTitle" placeholder="Title" required><br><br>
-        <textarea id="postContent" placeholder="Content" required></textarea><br><br>
-        <button type="submit">Post</button>
-    </form>
-    <button onclick="closeCreatePostPopup()">Close</button>
-    <br>
-    <br>
-    <br>
-    <br>
-</div>
+        filterButton.addEventListener("click", () => {
+          filterPopup.style.display = "block";
+        });
 
-<div id="overlay" class="overlay"></div>
+        closeFilterPopup.addEventListener("click", () => {
+          filterPopup.style.display = "none";
+        });
 
-<div class="forum-posts" id="forumPosts">
-  <!--add nam stuff-->
-</div>
+        createPostButton.addEventListener("click", () => {
+          createPostPopup.style.display = "block";
+        });
 
-<script>
-    document.getElementById('filterButton').addEventListener('click', function() {
-        document.getElementById('filterPopup').style.display = 'block';
-        document.getElementById('overlay').style.display = 'block';
-    });
+        closeCreatePostPopup.addEventListener("click", () => {
+          createPostPopup.style.display = "none";
+        });
 
-    document.getElementById('createButton').addEventListener('click', function() {
-        document.getElementById('createPostPopup').style.display = 'block';
-        document.getElementById('overlay').style.display = 'block';
-    });
+        submitPostButton.addEventListener("click", () => {
+          const postName = document.getElementById("post-name").value;
+          const postDescription =
+            document.getElementById("post-description").value;
+          const postCategory = document.getElementById("post-category").value;
 
-    document.getElementById('createPostForm').addEventListener('submit', function(event) {
-        event.preventDefault();
-        const title = document.getElementById('postTitle').value;
-        const content = document.getElementById('postContent').value;
-        addPost(title, content);
-        closeCreatePostPopup();
-    });
+          if (postName && postDescription && postCategory) {
+            const postContainer = document.getElementById("posts-container");
+            const newPost = document.createElement("div");
+            newPost.className = "post";
+            newPost.innerHTML = `
+        <h3>${postName}</h3>
+        <p>${postDescription}</p>
+        <p><strong>Category:</strong> ${postCategory}</p>
+      `;
+            postContainer.appendChild(newPost);
 
-    function closeFilterPopup() {
-        document.getElementById('filterPopup').style.display = 'none';
-        document.getElementById('overlay').style.display = 'none';
-    }
+            createPostPopup.style.display = "none";
+            document.getElementById("post-name").value = "";
+            document.getElementById("post-description").value = "";
+            document.getElementById("post-category").value = "";
+          }
+        });
 
-    function closeCreatePostPopup() {
-        document.getElementById('createPostPopup').style.display = 'none';
-        document.getElementById('overlay').style.display = 'none';
-    }
-
-    function addPost(title, content) {
-        const forumPosts = document.getElementById('forumPosts');
-        const newPost = document.createElement('div');
-        newPost.className = 'forum-post';
-        newPost.innerHTML = `<h3>${title}</h3><p>${content}</p>`;
-        forumPosts.appendChild(newPost);
-    }
-
-    document.getElementById('overlay').addEventListener('click', function() {
-        closeFilterPopup();
-        closeCreatePostPopup();
-    });
-</script>
-
-</body>
+        document.querySelectorAll(".university-button").forEach((button) => {
+          button.addEventListener("click", (event) => {
+            const university = event.target.innerText;
+            document.getElementById("search-input").value = university;
+            filterPopup.style.display = "none";
+          });
+        });
+      });
+    </script>
+  </body>
 </html>
