@@ -3,206 +3,107 @@
   <head>
     <meta charset="UTF-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-    <title>Search Bar with Filter and Create Post</title>
+    <title>Search and Create Posts</title>
     <link rel="stylesheet" href="styles.css" />
-    <div class="navbar">
-        <button class = "btn"><img src="Images/projectLogo.png"><a href="home.html"></class></i></button>
-        <a href="home.html">HOME</a>
-        <a href="forums.html">FORUMS</a>
-        <a href="rankings.html">RANKINGS</a>
-        <a href="info.html">INFO</a>
-        <a href="profile.html">👤PROFILE</a>
-        <a href="signup.html" class="split">SIGN-IN</a>
-        <br />
-        <br />
-        <div class="line"></div>
-      </div>
   </head>
   <body>
+    <div class="navbar">
+      <button class = "btn"><img src="Images/projectLogo.png"><a href="home.html"></class></i></button>
+      <a href="home.html">HOME</a>
+      <a href="forums.html">FORUMS</a>
+      <a href="rankings.html">RANKINGS</a>
+      <a href="info.html">INFO</a>
+      <a href="profile.html">👤PROFILE</a>
+      <a href="signup.html" class="split">SIGN-IN</a>
+      <br />
+      <br />
+      <div class="line"></div>
+    </div>
+    <div class="typewriter"> 
+      <center>
+        <h1>UNDERGRADUATE FORUMS</h1>
+        <div>
     <div class="container">
       <div class="search-bar">
-        <input type="text" id="search-input" placeholder="Search..." />
-        <button id="filter-button">Filter</button>
-        <button id="search-button">Search</button>
+        <input type="text" id="searchInput" placeholder="Search..." />
+        <button onclick="searchPost()">Search</button>
+        <button onclick="openCreatePostPopup()">Create Post</button>
       </div>
-      <button id="create-post-button">Create Post</button>
-    </div>
-
-    <div id="posts-container"></div>
-
-    <div id="filter-popup" class="popup">
-      <div class="popup-content">
-        <h2>Select University</h2>
-        <ul>
-          <li>
-            <button class="university-button">University of Toronto</button>
-          </li>
-          <li>
-            <button class="university-button">University of Ottawa</button>
-          </li>
-          <li><button class="university-button">Western University</button></li>
-          <li><button class="university-button">Queen's University</button></li>
-        </ul>
-        <button id="close-filter-popup">Close</button>
-      </div>
-    </div>
-
-    <div id="create-post-popup" class="popup">
-      <div class="popup-content">
+      <div class="create-post-popup" id="createPostPopup">
         <h2>Create Post</h2>
-        <label for="post-name">Post Name:</label>
-        <input type="text" id="post-name" />
-        <label for="post-description">Description:</label>
-        <textarea id="post-description"></textarea>
-        <label for="post-category">Category:</label>
-        <input type="text" id="post-category" />
-        <button id="submit-post">Submit</button>
-        <button id="close-create-post-popup">Close</button>
+        <input type="text" id="postTitle" placeholder="Title" />
+        <textarea id="postDescription" placeholder="Description"></textarea>
+        <input type="text" id="postCategory" placeholder="Category" />
+        <button onclick="submitPost()">Submit</button>
       </div>
+      <div id="postsList"></div>
     </div>
-
     <style>
       body {
-        font-family: Arial, sans-serif;
-        display: flex;
-        justify-content: center;
-        align-items: center;
-        height: 100vh;
-        background-color: #f4f4f4;
         margin: 0;
+        font-family: Arial, sans-serif;
       }
 
       .container {
         display: flex;
+        flex-direction: column;
         align-items: center;
-        margin-right:-100px;
+        justify-content: center;
+        height: 5vh;
       }
 
       .search-bar {
         display: flex;
-        border: 1px solid #ccc;
-        border-radius: 25px;
-        overflow: hidden;
+        align-items: center;
       }
 
-      .search-bar input {
-        border: none;
+      .search-bar input[type="text"],
+      .search-bar button {
         padding: 10px;
-        flex: 1;
+        font-size: 16px;
+        border: none;
+        outline: none;
+      }
+
+      .search-bar input[type="text"] {
+        border-radius: 20px;
+        margin-right: 10px;
       }
 
       .search-bar button {
-        border: none;
+        border-radius: 20px;
         background-color: #007bff;
-        color: white;
-        padding: 10px 20px;
+        color: #fff;
         cursor: pointer;
       }
 
-      #filter-button {
-        background-color: #6c757d;
-      }
-
-      #filter-popup,
-      #create-post-popup {
+      .create-post-popup {
         display: none;
         position: fixed;
         top: 50%;
         left: 50%;
         transform: translate(-50%, -50%);
-        background-color: white;
-        border: 1px solid #ccc;
-        border-radius: 5px;
+        background-color: #fff;
         padding: 20px;
-        box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
+        border-radius: 10px;
+        box-shadow: 0 0 10px rgba(0, 0, 0, 0.2);
       }
 
-      .popup-content h2 {
-        margin-top: 0;
-      }
-
-      #posts-container {
-        margin-top: 20px;
+      .create-post-popup input[type="text"],
+      .create-post-popup textarea,
+      .create-post-popup button {
         width: 100%;
-      }
-
-      .post {
-        background-color: white;
-        padding: 10px;
-        border: 1px solid #ccc;
-        border-radius: 5px;
         margin-bottom: 10px;
       }
 
-      button {
+      .create-post-popup button {
+        background-color: #007bff;
+        color: #fff;
+        border: none;
+        padding: 10px;
         cursor: pointer;
       }
-
-      button:focus {
-        outline: none;
-      }
     </style>
-    <script>
-      document.addEventListener("DOMContentLoaded", () => {
-        const filterButton = document.getElementById("filter-button");
-        const filterPopup = document.getElementById("filter-popup");
-        const closeFilterPopup = document.getElementById("close-filter-popup");
-
-        const createPostButton = document.getElementById("create-post-button");
-        const createPostPopup = document.getElementById("create-post-popup");
-        const closeCreatePostPopup = document.getElementById(
-          "close-create-post-popup"
-        );
-        const submitPostButton = document.getElementById("submit-post");
-
-        filterButton.addEventListener("click", () => {
-          filterPopup.style.display = "block";
-        });
-
-        closeFilterPopup.addEventListener("click", () => {
-          filterPopup.style.display = "none";
-        });
-
-        createPostButton.addEventListener("click", () => {
-          createPostPopup.style.display = "block";
-        });
-
-        closeCreatePostPopup.addEventListener("click", () => {
-          createPostPopup.style.display = "none";
-        });
-
-        submitPostButton.addEventListener("click", () => {
-          const postName = document.getElementById("post-name").value;
-          const postDescription =
-            document.getElementById("post-description").value;
-          const postCategory = document.getElementById("post-category").value;
-
-          if (postName && postDescription && postCategory) {
-            const postContainer = document.getElementById("posts-container");
-            const newPost = document.createElement("div");
-            newPost.className = "post";
-            newPost.innerHTML = `
-        <h3>${postName}</h3>
-        <p>${postDescription}</p>
-        <p><strong>Category:</strong> ${postCategory}</p>
-      `;
-            postContainer.appendChild(newPost);
-
-            createPostPopup.style.display = "none";
-            document.getElementById("post-name").value = "";
-            document.getElementById("post-description").value = "";
-            document.getElementById("post-category").value = "";
-          }
-        });
-
-        document.querySelectorAll(".university-button").forEach((button) => {
-          button.addEventListener("click", (event) => {
-            const university = event.target.innerText;
-            document.getElementById("search-input").value = university;
-            filterPopup.style.display = "none";
-          });
-        });
-      });
-    </script>
+    <script src="forums.js"></script>
   </body>
 </html>
