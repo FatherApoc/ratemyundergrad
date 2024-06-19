@@ -4,10 +4,12 @@
     <meta charset="UTF-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
     <title>Search and Create Posts</title>
+    <!--Importing the style sheet-->
     <link rel="stylesheet" href="styles.css" />
   </head>
   <body>
     <div class="navbar">
+      <!--Creates a button class for the logo image in the top right with respective CSS-->
       <button class = "btn"><img src="Images/projectLogo.png"><a href="home.html"></class></i></button>
       <a href="home.html">HOME</a>
       <a href="forums.html">FORUMS</a>
@@ -25,19 +27,27 @@
         <div>
     <div class="container">
       <div class="search-bar">
+        <!--Placeholder text-->
         <input type="text" id="searchInput" placeholder="Search..." />
+        <!--searchPost() function for the search bar-->
         <button onclick="searchPost()">Search</button>
+        <!--openCreatePostPopup button-->
         <button onclick="openCreatePostPopup()">Create Post</button>
       </div>
       <div class="create-post-popup" id="createPostPopup">
         <h2>Create Post</h2>
+        <!--Title input-->
         <input type="text" id="postTitle" placeholder="Title" />
+        <!--Description input-->
         <textarea id="postDescription" placeholder="Description"></textarea>
+        <!--Category input-->
         <input type="text" id="postCategory" placeholder="Category" />
+        <!--Submit post-->
         <button onclick="submitPost()">Submit</button>
       </div>
       <div id="postsList"></div>
     </div>
+    <!--Style within the page itself for the functions + containers-->
     <style>
       body {
         margin: 0;
@@ -105,6 +115,7 @@
         cursor: pointer;
       }
     </style>
+    <!-- Script re-direction -->
     <script src="forums.js"></script>
   </body>
 </html>

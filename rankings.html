@@ -8,6 +8,7 @@
   </head>
   <body>
     <div class="navbar">
+      <!--LOGO-->
       <button class = "btn"><img src="Images/projectLogo.png"><a href="home.html"></class></i></button>
       <a href="home.html">HOME</a>
       <a href="forums.html">FORUMS</a>
@@ -20,6 +21,7 @@
       <div class="line"></div>
     </div>
     <div class="container">
+      <!--Search input-->
       <h1>Ontario Universities Search</h1>
       <input
         type="text"
@@ -31,6 +33,7 @@
     </div>
     <script src="script.js"></script>
   </body>
+  <!--Body styling implementation-->
   <style>
     body {
       font-family: Arial, sans-serif;
@@ -129,6 +132,7 @@
       border-left: 5px solid red;
     }
   </style>
+  <!--Script for the code-->
   <script>
     document
       .getElementById("searchButton")
@@ -138,7 +142,7 @@
           .value.toLowerCase();
         const resultsDiv = document.getElementById("results");
         resultsDiv.innerHTML = "";
-
+        //Creates the constants for the universities (hard coded)
         const universities = {
           "university of toronto": {
             name: "University of Toronto",
@@ -153,6 +157,7 @@
               "Competitive environment",
             ],
           },
+          //mcmaster university
           "mcmaster university": {
             name: "McMaster University",
             pros: [
@@ -180,7 +185,7 @@
           ]
         },
         }
-
+        // Search Query for the university name in the search bar
         if (universities[searchQuery]) {
           const university = universities[searchQuery];
           const resultDiv = document.createElement("div");
@@ -192,6 +197,7 @@
           const nameH2 = document.createElement("h2");
           nameH2.innerText = university.name;
 
+          // Creates the formatting for the code
           const prosUl = document.createElement("ul");
           prosUl.className = "pros";
           university.pros.forEach((pro) => {
